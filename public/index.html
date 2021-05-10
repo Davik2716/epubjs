@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EPUB.js Ejemplo de Resaltador</title>
+    <script src="js/epub.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
+        integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-success">
+        <a class="navbar-brand mx-auto">
+            <h1>EPUB JS</h1>
+        </a>
+    </nav>
+
+    <div id="contentWrap" class="container">
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <select id="toc"></select>
+                    <div id="viewer" class="spreads"></div>
+                    <a id="prev" href="#prev" class="arrow">‹</a>
+                    <a id="next" href="#next" class="arrow">›</a>
+                </div>
+                <div id="extras">
+                    <ul id="highlights"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
