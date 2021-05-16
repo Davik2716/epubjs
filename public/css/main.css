@@ -39,16 +39,16 @@
 
 /* https://uigradients.com/#DarkOcean */
 
-body {
-    background: yellowgreen;
-    /* background: #373B44; */
-    /* fallback for old browsers */
-    /* background: -webkit-linear-gradient(to right, #4286f4, #373B44); */
-    /* Chrome 10-25, Safari 5.1-6 */
-    /* background: linear-gradient(to right, #4286f4, #373B44); */
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    /* color: whitesmoke; */
-}
+/* body { */
+/* background: yellowgreen; */
+/* background: #373B44; */
+/* fallback for old browsers */
+/* background: -webkit-linear-gradient(to right, #4286f4, #373B44); */
+/* Chrome 10-25, Safari 5.1-6 */
+/* background: linear-gradient(to right, #4286f4, #373B44); */
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+/* color: whitesmoke; */
+/* } */
 
 #contentWrap {
     /* background: green; */
@@ -64,36 +64,6 @@ body {
 
 a:link, a:visited, a:active {
     text-decoration: none;
-}
-
-/* #epubjs-container-eea9ceb2-2fd5-4efb-bd03-4887399c0fdc{
-    background-color: white;
-    color: blue;
-}
-.epub-view{
-    background: red;
-    color: blue;
-} */
-
-.error {
-    color: red;
-}
-
-h3 {
-    /* color: red; */
-    text-align: center;
-}
-
-.whisper {
-    color: gray;
-    font-style: italic;
-}
-
-/* SCROLL DEL CHAT */
-
-#chat {
-    overflow-y: scroll;
-    height: 20em;
 }
 
 /* BTARRILLO */
