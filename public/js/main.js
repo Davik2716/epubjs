@@ -2,8 +2,12 @@ var params = URLSearchParams && new URLSearchParams(document.location.search.sub
 var url = params && params.get("url") && decodeURIComponent(params.get("url"));
 var currentSectionIndex = (params && params.get("loc")) ? params.get("loc") : undefined;
 
+// alert("alola "+ color_resaltador.value)
+
 // Load the opf
-var book = ePub(url || "https://s3.amazonaws.com/moby-dick/moby-dick.epub");
+// var book = ePub(url || "https://s3.amazonaws.com/moby-dick/moby-dick.epub");
+var book = ePub("https://qillqa.pe/publico/img_data/JUNIOR_LO%20MEJOR%20DE%20LO%20MEJOR%202020.epub");
+// var book = ePub("libros_qillqa/Ancón_Santiago_Tácunan_Bonifacio_Luis_Alberto_Torrejón_Rengifo WE TRANSFER.epub");
 var rendition = book.renderTo("viewer", {
     width: "100%",
     height: 450,
@@ -16,12 +20,14 @@ book.ready.then(() => {
     var next = document.getElementById("next");
     next.addEventListener("click", function (e) {
         book.package.metadata.direction === "rtl" ? rendition.prev() : rendition.next();
+        cambiarFondo(document.getElementById("fondo").value)
         e.preventDefault();
     }, false);
 
     var prev = document.getElementById("prev");
     prev.addEventListener("click", function (e) {
         book.package.metadata.direction === "rtl" ? rendition.next() : rendition.prev();
+        cambiarFondo(document.getElementById("fondo").value)
         e.preventDefault();
     }, false);
 
@@ -29,10 +35,12 @@ book.ready.then(() => {
         // Left Key
         if ((e.keyCode || e.which) == 37) {
             book.package.metadata.direction === "rtl" ? rendition.next() : rendition.prev();
+            cambiarFondo(document.getElementById("fondo").value)
         }
         // Right Key
         if ((e.keyCode || e.which) == 39) {
             book.package.metadata.direction === "rtl" ? rendition.prev() : rendition.next();
+            cambiarFondo(document.getElementById("fondo").value)
         }
     };
 
@@ -111,6 +119,7 @@ book.loaded.navigation.then(function (toc) {
     $select.onchange = function () {
         var index = $select.selectedIndex,
             url = $select.options[index].getAttribute("ref");
+        cambiarFondo(document.getElementById("fondo").value)
         rendition.display(url);
         return false;
     };
@@ -124,20 +133,37 @@ rendition.on("selected", function (cfiRange, contents) {
     contents.window.getSelection().removeAllRanges();
 });
 
-this.rendition.themes.default({
-    '::selection': {
-        'background': 'rgba(255,255,0, 0.3)'
-    },
-    '.epubjs-hl': {
-        'fill': 'yellow',
-        'fill-opacity': '0.3',
-        'mix-blend-mode': 'multiply'
-    }
-});
+// var color_resaltador = document.getElementById("resaltador").value
+// alert("este"+color_resaltador)
+// this.rendition.themes.default({
+//     '::selection': {
+//         // color mientras se selecciona
+//         // 'background': definirColor()
+//         // 'background': "red, 0.3"
+//         'background': 'rgba(255,0,0, 0.3)'      // red
+//         // 'background': 'rgba(255,255,0, 0.3)'    // amarillo
+//         // 'background': 'rgb(0, 128, 0, 0.3)'     // verde
+//         // 'background': 'rgb(0, 0, 255, 0.3)'     // azul
+//         // 'background': 'rgb(64, 224, 208, 0.3)'  // turquesa
+//     }
+//     // ,
+//     // '.epubjs-hl': {
+//     //     'fill': 'yellow',
+//     //     'fill-opacity': '0.3',
+//     //     'mix-blend-mode': 'multiply'
+//     // }
+// });
 
 // Conseguir el texto guardado del cfiRange
 var highlights = document.getElementById('highlights');
 rendition.on("selected", function (cfiRange) {
+    // quitar este bloque
+    rendition.themes.default({
+        '::selection': {
+            'background': definirColor()
+        }
+    });
+
     book.getRange(cfiRange).then(function (range) {
         var contador = $('#contador').val();
         var text;
@@ -147,7 +173,7 @@ rendition.on("selected", function (cfiRange) {
         var tdOrden = document.createElement('td');
         var tdResaltado = document.createElement('td');
         tdResaltado.setAttribute("id", "resaltado" + contador);
-        
+
         var tdLink = document.createElement('td');
         var tdAnotacion = document.createElement('td');
         var tdEliminar = document.createElement('td');
@@ -267,3 +293,106 @@ window.enviarAnotacion = function () {
         anotaciones.appendChild(a);
     }
 };
+
+// cambiar el color del resaltador
+function definirColor() {
+    var color = document.getElementById("resaltador").value
+    var bk
+    switch (color) {
+        case "yellow": bk = 'rgba(255,255,0, 0.3)'
+            break;
+        case "green": bk = 'rgba(0, 128, 0, 0.3)'
+            break;
+        case "blue": bk = 'rgba(0, 0, 255, 0.3)'
+            break;
+        case "turquoise": bk = 'rgb(64, 224, 208, 0.3)'
+            break;
+    }
+    return bk
+}
+
+// Cambiar el color del resaltador
+$(function () {
+    // guardar el color en la caja de texto
+    $("#yellow").click(function () {
+        $('#resaltador').val("yellow")
+    });
+    $("#green").click(function () {
+        $('#resaltador').val("green")
+    });
+    $("#blue").click(function () {
+        $('#resaltador').val("blue")
+    });
+    $("#turquoise").click(function () {
+        $('#resaltador').val("turquoise")
+    });
+});
+
+function cambiarFondo(color) {
+    var id = $("iframe").attr("id");
+    var iframe = document.getElementById(id);
+    var x = iframe.contentDocument;
+
+    switch (color) {
+        case "blanco":
+            iframe.style.backgroundColor = "white";
+            iframe.style.color = "black";
+            x.body.style.backgroundColor = "white";
+            x.body.style.color = "black";
+            break;
+        case "negro":
+            iframe.style.backgroundColor = "rgb(20, 20, 20)";
+            iframe.style.color = "white";
+            x.body.style.backgroundColor = "rgb(20, 20, 20)";
+            x.body.style.color = "white";
+            break;
+    }
+}
+
+//Cambiando colores de fondo
+$(function () {
+    /*Cambiando css*/
+    $("#btnFondoBlanco").click(function () {
+        $('#fondo').val("blanco")
+        cambiarFondo(document.getElementById("fondo").value)
+        // var id = $("iframe").attr("id");
+        // var iframe = document.getElementById(id);
+        // var x = iframe.contentDocument;
+        // var y = iframe.contentWindow;
+        //var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+
+        // x.body.style.backgroundColor = "white";
+        // x.body.style.color = "black";
+
+        // Comentado por David
+        // var elmnt = y.document.getElementsByTagName("li")[0];
+        // elmnt.style.color = "black";
+    });
+    $("#btnFondoNegro").click(function () {
+        $('#fondo').val("negro")
+        cambiarFondo(document.getElementById("fondo").value)
+        // var id = $("iframe").attr("id");
+        // var iframe = document.getElementById(id);
+        // var x = iframe.contentDocument;
+        // var y = iframe.contentWindow;
+        //var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+
+        // x.body.style.backgroundColor = "black";
+        // x.body.style.color = "white";
+
+        //var elmnt = y.document.getElementsByTagName("li")[0];
+        //elmnt.style.color = "white";
+
+        // Comentado por David
+        // var cantidad = y.document.getElementsByTagName("a").length;
+        // console.log('cantidad:', cantidad);
+
+        // var i = 0;
+        // while (i < cantidad) {
+        //     var elmnt = y.document.getElementsByTagName("a")[i];
+        //     elmnt.style.color = "white !important";
+        //     console.log(`Numero: ${i}`);
+        //     i++;
+        // }
+    });
+});

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>EPUB.js Función de Resaltador</title>
+    <title>QILLQA Resaltador y Fondo</title>
     <script src="js/epub.js"></script>
     <script src="js/main.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
@@ -28,61 +28,97 @@
     </svg>
 
     <div class="container-fluid">
-    <div class="row">
-        <nav class="navbar navbar-dark bg-success">
-            <a class="navbar-brand mx-auto">
-                <h1>EPUB JS</h1>
-            </a>
-        </nav>
-    </div>
-
-    <div class="row align-items-start">
-        <div class="col-2">
-            <a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
-                <svg class="bi me-2" width="30" height="24">
-                    <use xlink:href="#bootstrap" />
-                </svg>
-                <span class="fs-5 fw-semibold">Anotaciones</span>
-            </a>
-            <div class="list-group list-group-flush border-bottom scrollarea" id="anotaciones"></div>
+        <div class="row">
+            <nav class="navbar navbar-dark bg-success">
+                <a class="navbar-brand mx-auto">
+                    <h1>QILLQA EPUB</h1>
+                </a>
+            </nav>
         </div>
-        <div class="col-10">
-            <div>
-                <div class="card">
-                    <select id="toc"></select>
-                    <div id="viewer" class="spreads"></div>
-                    <a id="prev" href="#prev" class="arrow">‹</a>
-                    <a id="next" href="#next" class="arrow">›</a>
+
+        <div class="row align-items-start">
+            <div class="col-2">
+                <a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+                    <span class="fs-5 fw-semibold">Anotaciones</span>
+                </a>
+                <div class="list-group list-group-flush border-bottom scrollarea" id="anotaciones"></div>
+            </div>
+            <div class="col-10">
+                <div>
+                    <div class="card">
+                        <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+                            <div class="container-fluid justify-content-start" style="width: 10%; float:left">
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#navbarToggleExternalContent"
+                                    aria-controls="navbarToggleExternalContent" aria-expanded="false"
+                                    aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                            </div>
+                            <div style="width: 45%; float:left">
+                                <div class="row" style="display: flex; justify-content: center;">
+                                    <button class="btn btn-sm btn-warning" style="width: 30px; height: 30px;"
+                                        type="button" id="yellow"></button>
+                                    <button class="btn btn-sm btn-success ms-1" style="width: 30px; height: 30px;"
+                                        type="button" id="green"></button>
+                                    <button class="btn btn-sm btn-primary ms-1" style="width: 30px; height: 30px;"
+                                        type="button" id="blue"></button>
+                                    <button class="btn btn-sm btn-info ms-1" style="width: 30px; height: 30px;"
+                                        type="button" id="turquoise"></button>
+                                </div>
+                                <div class="row" style="text-align: center;">
+                                    <small>Colores de resaltado</small>
+                                </div>
+                            </div>
+                            <div style="width: 45%; float:right">
+                                <div class="row" style="display: flex; justify-content: center;">
+                                    <button class="btn btn-sm btn-light" style="width: 30px; height: 30px;"
+                                        type="button" id="btnFondoBlanco"></button>
+                                    <button class="btn btn-sm btn-dark ms-1" style="width: 30px; height: 30px;"
+                                        type="button" id="btnFondoNegro"></button>
+                                </div>
+                                <div class="row" style="text-align: center;">
+                                    <small>Colores de fondo</small>
+                                </div>
+
+                            </div>
+                        </nav>
+                        <select id="toc"></select>
+                        <div id="viewer"></div>
+                        <a id="prev" href="#prev" class="arrow">‹</a>
+                        <a id="next" href="#next" class="arrow">›</a>
+                    </div>
+                </div>
+                <div class="mt-5">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Resaltado</th>
+                                <th scope="col">Ir al texto</th>
+                                <th scope="col">Anotar</th>
+                                <th scope="col">Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="highlights">
+                        </tbody>
+                    </table>
+                    <input type="text" id="contador" value="1" hidden>
+                    <input type="text" id="seleccion" value="0" hidden>
+                    <input type="text" id="resaltador" value="yellow" hidden>
+                    <input type="text" id="fondo" value="blanco" >
                 </div>
             </div>
-            <div class="mt-5">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Resaltado</th>
-                            <th scope="col">Ir al texto</th>
-                            <th scope="col">Anotar</th>
-                            <th scope="col">Eliminar</th>
-                        </tr>
-                    </thead>
-                    <tbody id="highlights">
-                    </tbody>
-                </table>
-                <input type="text" id="contador" value="1" hidden>
-                <input type="text" id="seleccion" value="0" hidden>
-            </div>
         </div>
-    </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
     </div>
 </body>
 
