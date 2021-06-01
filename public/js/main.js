@@ -210,11 +210,11 @@ rendition.on("selected", function (cfiRange) {
             };
 
             anotation.textContent = "anotar" + contador;
-            anotation.setAttribute("class", "btn btn-info");
+            anotation.setAttribute("class", "btn btn-secondary");
 
             anotation.onclick = function () {
                 //llamar a una caja de texto para las anotaciones y un boton de envio de data
-                $('.btn').popover({
+                $('.btn-secondary').popover({
                     content: "<div class='input-group mb-3'><input type='text' class='form-control' " +
                         "placeholder='Escriba la anotación' aria-label='Escriba la anotación' " +
                         "aria-describedby='button-addon2'><button onclick='enviarAnotacion();' " +
@@ -346,7 +346,39 @@ function cambiarFondo(color) {
             x.body.style.backgroundColor = "rgb(20, 20, 20)";
             x.body.style.color = "white";
             break;
+        case "sepia":
+            iframe.style.backgroundColor = "rgb(247, 241, 207)";
+            iframe.style.color = "rgb(119, 76, 39)";
+            x.body.style.backgroundColor = "rgb(247, 241, 207)";
+            x.body.style.color = "rgb(119, 76, 39)";
+            break;
+        case "azuloscuro":
+            iframe.style.backgroundColor = "rgb(87, 107, 150)";
+            iframe.style.color = "rgb(221, 221, 221)";
+            x.body.style.backgroundColor = "rgb(87, 107, 150)";
+            x.body.style.color = "rgb(221, 221, 221)";
+            break;
+        case "azulclaro":
+            iframe.style.backgroundColor = "rgb(221, 221, 221)";
+            iframe.style.color = "rgb(87, 107, 150)";
+            x.body.style.backgroundColor = "rgb(221, 221, 221)";
+            x.body.style.color = "rgb(87, 107, 150)";
+            break;
     }
+}
+
+function cambiarTamano(signo) {
+    var id = $("iframe").attr("id");
+    var iframe = document.getElementById(id);
+    var x = iframe.contentDocument;
+    var tam = parseInt(document.getElementById("tamano").value)
+    if (signo == "+") {
+        tam++
+    } else if (signo == "-") {
+        tam--
+    }
+    x.body.style.fontSize = tam + "px";
+    $('#tamano').val(tam)
 }
 
 //Cambiando colores de fondo
@@ -395,4 +427,37 @@ $(function () {
         //     i++;
         // }
     });
+    $("#btnFondoSepia").click(function () {
+        $('#fondo').val("sepia")
+        cambiarFondo(document.getElementById("fondo").value)
+    });
+    $("#btnFondoAzulOscuro").click(function () {
+        $('#fondo').val("azuloscuro")
+        cambiarFondo(document.getElementById("fondo").value)
+    });
+    $("#btnFondoAzulClaro").click(function () {
+        $('#fondo').val("azulclaro")
+        cambiarFondo(document.getElementById("fondo").value)
+    });
+
+    // cambiando el tamaño de fuente
+    $("#btnmas").click(function () {
+        var tam = parseInt(document.getElementById("tamano").value)
+        if (tam < 26) {
+            cambiarTamano("+")
+        }
+    });
+    $("#btnmenos").click(function () {
+        var tam = parseInt(document.getElementById("tamano").value)
+        if (tam > 8) {
+            cambiarTamano("-")
+        }
+    });
 });
+
+window.setInterval(function () {
+    cambiarFondo(document.getElementById("fondo").value)
+    var tam = parseInt(document.getElementById("tamano").value)
+    document.getElementById($("iframe").attr("id")).contentDocument.body.style.fontSize = tam + "px";
+    // $('#tamano').val(tam)
+}, 100);
