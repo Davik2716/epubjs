@@ -9,10 +9,12 @@ var mi_indice = [];
 // Load the opf
 // var book = ePub(url || "https://s3.amazonaws.com/moby-dick/moby-dick.epub");
 // var book = ePub("https://qillqa.pe/publico/img_data/JUNIOR_LO%20MEJOR%20DE%20LO%20MEJOR%202020.epub");
-var book = ePub("libros_qillqa/Ancón_Santiago_Tácunan_Bonifacio_Luis_Alberto_Torrejón_Rengifo.epub");
+// var book = ePub("libros_qillqa/Ancón_Santiago_Tácunan_Bonifacio_Luis_Alberto_Torrejón_Rengifo.epub");
+var book = ePub("libros_qillqa/JUNIOR_LO MEJOR DE LO MEJOR 2020.epub");
 var rendition = book.renderTo("viewer", {
     width: "100%",
-    height: 450,
+    height: "100%",
+    // height: 450,
     spread: "always"
 });
 
@@ -53,6 +55,21 @@ book.ready.then(() => {
             // eliminar los elementos de los array
             mi_rango.splice(mi_rango.length - 1, 1)
             mi_indice.splice(mi_indice.length - 1, 1)
+        }
+        // F Key
+        if ((e.keyCode || e.which) == 70) {
+            // var elem = document.getElementsByClassName("epub-view");
+            var elem = document.getElementById("viewer");
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            }
+            // var f = mi_indice[mi_indice.length - 1]
+            // // eliminar el resaltado y la fila
+            // rendition.annotations.remove(mi_rango[mi_rango.length - 1]);
+            // $('#fila' + f + '').remove();
+            // // eliminar los elementos de los array
+            // mi_rango.splice(mi_rango.length - 1, 1)
+            // mi_indice.splice(mi_indice.length - 1, 1)
         }
     };
 
@@ -228,9 +245,9 @@ rendition.on("selected", function (cfiRange) {
                 // restaurar el contador    -> NO USARLO POR AHORA
                 // $('#contador').val($('#contador').val()-1);
                 var i = mi_indice.indexOf(id_sel);
-                if (i !== -1) { 
-                    mi_indice.splice(i, 1); 
-                    mi_rango.splice(i, 1); 
+                if (i !== -1) {
+                    mi_indice.splice(i, 1);
+                    mi_rango.splice(i, 1);
                 }
                 return false;
             };
