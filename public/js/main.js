@@ -3,11 +3,13 @@ var url = params && params.get("url") && decodeURIComponent(params.get("url"));
 var currentSectionIndex = (params && params.get("loc")) ? params.get("loc") : undefined;
 
 // alert("alola "+ color_resaltador.value)
+var mi_rango = [];
+var mi_indice = [];
 
 // Load the opf
 // var book = ePub(url || "https://s3.amazonaws.com/moby-dick/moby-dick.epub");
-var book = ePub("https://qillqa.pe/publico/img_data/JUNIOR_LO%20MEJOR%20DE%20LO%20MEJOR%202020.epub");
-// var book = ePub("libros_qillqa/Ancón_Santiago_Tácunan_Bonifacio_Luis_Alberto_Torrejón_Rengifo WE TRANSFER.epub");
+// var book = ePub("https://qillqa.pe/publico/img_data/JUNIOR_LO%20MEJOR%20DE%20LO%20MEJOR%202020.epub");
+var book = ePub("libros_qillqa/Ancón_Santiago_Tácunan_Bonifacio_Luis_Alberto_Torrejón_Rengifo.epub");
 var rendition = book.renderTo("viewer", {
     width: "100%",
     height: 450,
@@ -41,6 +43,16 @@ book.ready.then(() => {
         if ((e.keyCode || e.which) == 39) {
             book.package.metadata.direction === "rtl" ? rendition.prev() : rendition.next();
             cambiarFondo(document.getElementById("fondo").value)
+        }
+        // Z Key
+        if ((e.keyCode || e.which) == 90) {
+            var f = mi_indice[mi_indice.length - 1]
+            // eliminar el resaltado y la fila
+            rendition.annotations.remove(mi_rango[mi_rango.length - 1]);
+            $('#fila' + f + '').remove();
+            // eliminar los elementos de los array
+            mi_rango.splice(mi_rango.length - 1, 1)
+            mi_indice.splice(mi_indice.length - 1, 1)
         }
     };
 
@@ -196,16 +208,30 @@ rendition.on("selected", function (cfiRange) {
                 rendition.display(cfiRange);
             };
 
+            // guardar el rango en una variable global
+            mi_rango.push(cfiRange)
+            mi_indice.push(contador)
+            // $('#rango').val($('#rango').val()+1);
+
             remove.textContent = "eliminar" + contador;
             remove.setAttribute("class", "btn btn-danger");
             remove.onclick = function () {
                 rendition.annotations.remove(cfiRange);
 
+                // eliminar la fila seleccionada
                 var id_sel = remove.textContent.slice(8);
                 $('#seleccion').val(id_sel);
 
                 //eliminar la fila del html
                 $('#fila' + id_sel + '').remove();
+
+                // restaurar el contador    -> NO USARLO POR AHORA
+                // $('#contador').val($('#contador').val()-1);
+                var i = mi_indice.indexOf(id_sel);
+                if (i !== -1) { 
+                    mi_indice.splice(i, 1); 
+                    mi_rango.splice(i, 1); 
+                }
                 return false;
             };
 
@@ -241,6 +267,7 @@ rendition.on("selected", function (cfiRange) {
 
             contador++
             $('#contador').val(contador);
+            // $('#rango').val(contador);
         }
     })
 });
@@ -250,7 +277,6 @@ window.accionarResaltado = function () {
 };
 
 window.enviarAnotacion = function () {
-    // console.log("alola "+$('.form-control').val());    
     if ($('.form-control').val().trim() == "") {
         console.log("NO HAY TEXTO");
     } else {
@@ -387,45 +413,10 @@ $(function () {
     $("#btnFondoBlanco").click(function () {
         $('#fondo').val("blanco")
         cambiarFondo(document.getElementById("fondo").value)
-        // var id = $("iframe").attr("id");
-        // var iframe = document.getElementById(id);
-        // var x = iframe.contentDocument;
-        // var y = iframe.contentWindow;
-        //var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-
-        // x.body.style.backgroundColor = "white";
-        // x.body.style.color = "black";
-
-        // Comentado por David
-        // var elmnt = y.document.getElementsByTagName("li")[0];
-        // elmnt.style.color = "black";
     });
     $("#btnFondoNegro").click(function () {
         $('#fondo').val("negro")
         cambiarFondo(document.getElementById("fondo").value)
-        // var id = $("iframe").attr("id");
-        // var iframe = document.getElementById(id);
-        // var x = iframe.contentDocument;
-        // var y = iframe.contentWindow;
-        //var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-
-        // x.body.style.backgroundColor = "black";
-        // x.body.style.color = "white";
-
-        //var elmnt = y.document.getElementsByTagName("li")[0];
-        //elmnt.style.color = "white";
-
-        // Comentado por David
-        // var cantidad = y.document.getElementsByTagName("a").length;
-        // console.log('cantidad:', cantidad);
-
-        // var i = 0;
-        // while (i < cantidad) {
-        //     var elmnt = y.document.getElementsByTagName("a")[i];
-        //     elmnt.style.color = "white !important";
-        //     console.log(`Numero: ${i}`);
-        //     i++;
-        // }
     });
     $("#btnFondoSepia").click(function () {
         $('#fondo').val("sepia")
@@ -455,9 +446,21 @@ $(function () {
     });
 });
 
+// Corregir los estilos al cambiar de hoja o de sección
 window.setInterval(function () {
     cambiarFondo(document.getElementById("fondo").value)
     var tam = parseInt(document.getElementById("tamano").value)
     document.getElementById($("iframe").attr("id")).contentDocument.body.style.fontSize = tam + "px";
-    // $('#tamano').val(tam)
 }, 100);
+
+// $(document).keydown(function (e) {
+//     if (e.ctrlKey && String.fromCharCode(e.keyCode) == 'Z') {
+//         var f = mi_indice[mi_indice.length - 1]
+//         // eliminar el resaltado y la fila
+//         rendition.annotations.remove(mi_rango[mi_rango.length - 1]);
+//         $('#fila' + f + '').remove();
+//         // eliminar los elementos de los array
+//         mi_rango.splice(mi_rango.length - 1, 1)
+//         mi_indice.splice(mi_indice.length - 1, 1)
+//     }
+// })
