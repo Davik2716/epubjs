@@ -501,7 +501,7 @@ $(function () {
         }
     });
 
-    // mostrar/ocultar anotaciones
+    // mostrar/ocultar columna anotaciones
     $("#btnAnotaciones").click(function () {
         var x = document.getElementById('columna-anot');
         if (x.style.visibility === 'hidden') {
