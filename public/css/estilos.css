@@ -1,51 +1,82 @@
 #prev {
-  left: 0;
+    left: 0;
 }
 
 #next {
-  right: 0;
+    right: 0;
 }
 
 .arrow {
-  position: fixed;
-  top: 50%;
-  margin-top: -32px;
-  font-size: 64px;
-  color: #E2E2E2;
-  font-family: arial, sans-serif;
-  font-weight: bold;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-  text-decoration: none;
+    position: fixed;
+    top: 50%;
+    margin-top: -32px;
+    font-size: 64px;
+    color: #E2E2E2;
+    font-family: arial, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    text-decoration: none;
 }
 
 .navlink {
-  margin: 14px;
-  display: block;
-  text-align: center;
-  text-decoration: none;
-  color: #ccc;
+    margin: 14px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #ccc;
 }
 
-.arrow:hover, .navlink:hover {
-  color: #777;
-  /* color: red; */
+.arrow:hover,
+.navlink:hover {
+    color: #777;
+    /* color: red; */
 }
 
-.arrow:active, .navlink:hover {
-  color: #000;
-  /* color: blue; */
+.arrow:active,
+.navlink:hover {
+    color: #000;
+    /* color: blue; */
 }
 
 #navigation ul li a {
-  color: #ccc;
-  text-decoration: none;
+    color: #ccc;
+    text-decoration: none;
 }
 
 #navigation ul li a:hover {
-  color: #fff;
-  /* text-decoration: underline; */
-  text-decoration: none;
+    color: #fff;
+    /* text-decoration: underline; */
+    text-decoration: none;
 }
+
+.anotaciones {
+    overflow-y: scroll;
+    max-height: 1000px;
+}
+
+.tablaresaltado {
+    overflow-y: scroll;
+    max-height: 500px;
+}
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+
+/* .anotaciones::-webkit-scrollbar {
+    display: none;
+}
+
+.tablaresaltado::-webkit-scrollbar {
+    display: none;
+} */
+
+
+/* Hide scrollbar for IE, Edge and Firefox */
+
+/* .anotaciones {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+} */

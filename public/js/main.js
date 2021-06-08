@@ -316,7 +316,7 @@ window.enviarAnotacion = function () {
         tit_anot.setAttribute("class", "d-flex w-100 align-items-center justify-content-between");
 
         var con_anot = document.createElement('div');
-        con_anot.setAttribute("class", "col-10 mb-1 small");
+        con_anot.setAttribute("class", "d-flex w-100 align-items-center justify-content-between small");
 
         /*anotacion*/
         var anotacionTexto = $('.form-control').val();
@@ -478,6 +478,24 @@ $(function () {
             cambiarTamano("-")
         }
     });
+
+    // pantalla completa    
+    $("#btnPanCom").click(function () {
+        var elem = document.getElementById("viewer");
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        }
+    });
+
+    // mostrar/ocultar indice
+    $("#btnIndice").click(function () {
+        var x = document.getElementById("toc");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    });
 });
 
 // Corregir los estilos al cambiar de hoja o de sección
@@ -485,4 +503,4 @@ window.setInterval(function () {
     cambiarFondo(document.getElementById("fondo").value)
     var tam = parseInt(document.getElementById("tamano").value)
     document.getElementById($("iframe").attr("id")).contentDocument.body.style.fontSize = tam + "px";
-}, 100);
+}, 50);
