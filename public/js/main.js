@@ -237,12 +237,14 @@ rendition.on("selected", function (cfiRange) {
             // $('#rango').val($('#rango').val()+1);
 
             remove.textContent = "eliminar" + contador;
+            // remove.setAttribute("id", "eliminar" + contador);
             remove.setAttribute("class", "btn btn-danger");
             remove.onclick = function () {
                 rendition.annotations.remove(cfiRange);
 
                 // eliminar la fila seleccionada
                 var id_sel = remove.textContent.slice(8);
+                // var id_sel = remove.getAttribute("id").slice(8);
                 $('#seleccion').val(id_sel);
 
                 //eliminar la fila del html
@@ -259,6 +261,7 @@ rendition.on("selected", function (cfiRange) {
             };
 
             anotation.textContent = "anotar" + contador;
+            // anotation.setAttribute("id", "anotar" + contador);
             anotation.setAttribute("class", "btn btn-secondary");
 
             anotation.onclick = function () {
@@ -273,6 +276,7 @@ rendition.on("selected", function (cfiRange) {
                     html: true
                 });
                 var id_sel = anotation.textContent.slice(6)
+                // var id_sel = anotation.getAttribute("id").slice(6)
                 $('#seleccion').val(id_sel);
             };
 
@@ -494,6 +498,16 @@ $(function () {
             x.style.display = "block";
         } else {
             x.style.display = "none";
+        }
+    });
+
+    // mostrar/ocultar anotaciones
+    $("#btnAnotaciones").click(function () {
+        var x = document.getElementById('columna-anot');
+        if (x.style.visibility === 'hidden') {
+            x.style.visibility = 'visible';
+        } else {
+            x.style.visibility = 'hidden';
         }
     });
 });
