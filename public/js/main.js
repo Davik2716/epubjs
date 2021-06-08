@@ -2,7 +2,6 @@ var params = URLSearchParams && new URLSearchParams(document.location.search.sub
 var url = params && params.get("url") && decodeURIComponent(params.get("url"));
 var currentSectionIndex = (params && params.get("loc")) ? params.get("loc") : undefined;
 
-// alert("alola "+ color_resaltador.value)
 var mi_rango = [];
 var mi_indice = [];
 
@@ -46,8 +45,8 @@ book.ready.then(() => {
             book.package.metadata.direction === "rtl" ? rendition.prev() : rendition.next();
             cambiarFondo(document.getElementById("fondo").value)
         }
-        // Z Key
-        if ((e.keyCode || e.which) == 90) {
+        // Ctrl + Z Key
+        if (e.ctrlKey && (e.keyCode || e.which) == 90) {
             var f = mi_indice[mi_indice.length - 1]
             // eliminar el resaltado y la fila
             rendition.annotations.remove(mi_rango[mi_rango.length - 1]);
@@ -56,20 +55,27 @@ book.ready.then(() => {
             mi_rango.splice(mi_rango.length - 1, 1)
             mi_indice.splice(mi_indice.length - 1, 1)
         }
-        // F Key
-        if ((e.keyCode || e.which) == 70) {
+        // Ctrl + Q Key
+        if (e.ctrlKey && (e.keyCode || e.which) == 81) {
             // var elem = document.getElementsByClassName("epub-view");
             var elem = document.getElementById("viewer");
             if (elem.requestFullscreen) {
                 elem.requestFullscreen();
             }
-            // var f = mi_indice[mi_indice.length - 1]
-            // // eliminar el resaltado y la fila
-            // rendition.annotations.remove(mi_rango[mi_rango.length - 1]);
-            // $('#fila' + f + '').remove();
-            // // eliminar los elementos de los array
-            // mi_rango.splice(mi_rango.length - 1, 1)
-            // mi_indice.splice(mi_indice.length - 1, 1)
+        }
+        // + Key
+        if ((e.keyCode || e.which) == 107) {
+            var tam = parseInt(document.getElementById("tamano").value)
+            if (tam < 26) {
+                cambiarTamano("+")
+            }
+        }
+        // - Key
+        if ((e.keyCode || e.which) == 109) {
+            var tam = parseInt(document.getElementById("tamano").value)
+            if (tam > 8) {
+                cambiarTamano("-")
+            }
         }
     };
 
@@ -262,7 +268,8 @@ rendition.on("selected", function (cfiRange) {
                         "placeholder='Escriba la anotación' aria-label='Escriba la anotación' " +
                         "aria-describedby='button-addon2'><button onclick='enviarAnotacion();' " +
                         "class='btn btn-outline-secondary' type='button' id='button-addon2'>Enviar</button></div>",
-                    placement: "bottom",
+                    placement: "auto",
+                    //trigger: "focus",
                     html: true
                 });
                 var id_sel = anotation.textContent.slice(6)
@@ -334,6 +341,12 @@ window.enviarAnotacion = function () {
         a.appendChild(con_anot);
 
         anotaciones.appendChild(a);
+
+        var idpopover = $(".popover").attr("id");
+        console.log(idpopover);
+        var element = document.getElementById(idpopover);
+        // elimina un elemento y se puede usar para eliminar anotaciones
+        element.remove();
     }
 };
 
@@ -342,13 +355,17 @@ function definirColor() {
     var color = document.getElementById("resaltador").value
     var bk
     switch (color) {
-        case "yellow": bk = 'rgba(255,255,0, 0.3)'
+        case "yellow":
+            bk = 'rgba(255,255,0, 0.3)'
             break;
-        case "green": bk = 'rgba(0, 128, 0, 0.3)'
+        case "green":
+            bk = 'rgba(0, 128, 0, 0.3)'
             break;
-        case "blue": bk = 'rgba(0, 0, 255, 0.3)'
+        case "blue":
+            bk = 'rgba(0, 0, 255, 0.3)'
             break;
-        case "turquoise": bk = 'rgb(64, 224, 208, 0.3)'
+        case "turquoise":
+            bk = 'rgb(64, 224, 208, 0.3)'
             break;
     }
     return bk
@@ -469,15 +486,3 @@ window.setInterval(function () {
     var tam = parseInt(document.getElementById("tamano").value)
     document.getElementById($("iframe").attr("id")).contentDocument.body.style.fontSize = tam + "px";
 }, 100);
-
-// $(document).keydown(function (e) {
-//     if (e.ctrlKey && String.fromCharCode(e.keyCode) == 'Z') {
-//         var f = mi_indice[mi_indice.length - 1]
-//         // eliminar el resaltado y la fila
-//         rendition.annotations.remove(mi_rango[mi_rango.length - 1]);
-//         $('#fila' + f + '').remove();
-//         // eliminar los elementos de los array
-//         mi_rango.splice(mi_rango.length - 1, 1)
-//         mi_indice.splice(mi_indice.length - 1, 1)
-//     }
-// })
