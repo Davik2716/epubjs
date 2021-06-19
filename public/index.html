@@ -36,13 +36,40 @@
                 </a>
             </nav>
         </div> -->
-        <div class="row align-items-start">
-            <!-- columna anotaciones -->
-            <div class="col-2 anotaciones" id="columna-anot">
-                <a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
-                    <span class="fs-5 fw-semibold">Anotaciones</span>
-                </a>
-                <div class="list-group list-group-flush border-bottom scrollarea" id="anotaciones"></div>
+        <div class="row align-items-start" style="background-color: rgb(50, 50, 50);">
+            <!-- columna lateral -->
+            <div class="col-2">
+                <!-- anotaciones -->
+                <div class="anotaciones" id="columna-anot" style="display: none;">
+                    <a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+                        <span class="fs-5 fw-semibold" style="color: white;">Anotaciones</span>
+                    </a>
+                    <div class="list-group list-group-flush border-bottom scrollarea" id="anotaciones"></div>
+                </div>
+                <!-- información -->
+                <div class="info" id="info-basica" style="color: white;">
+                    <a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+                        <span class="fs-5 fw-semibold" style="color: white;">Información</span>
+                    </a>
+                    <div class="list-group list-group-flush border-bottom scrollarea"></div>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque aut illum, inventore
+                        perspiciatis
+                        voluptatem dolore sed eius excepturi saepe perferendis, nobis magni tempora natus incidunt
+                        commodi
+                        non fuga! Earum, voluptatum!
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, molestiae. Obcaecati dolores
+                        repellendus adipisci quo atque laudantium blanditiis, pariatur hic distinctio suscipit animi,
+                        repudiandae dolorem nobis et deleniti officiis quam.
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi iusto optio sit iste ex
+                        repudiandae et suscipit! Labore debitis alias ducimus enim esse autem amet ea impedit corrupti
+                        vitae! Minima?
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem voluptas sapiente sit aut
+                        laboriosam corporis quasi amet laudantium est quisquam ab, mollitia, atque ex dolor adipisci
+                        sequi, nisi eum. Totam.
+
+                    </p>
+                </div>
             </div>
             <div class="col-10">
                 <div>
@@ -155,6 +182,7 @@
                                 </div>
                             </div>
                         </nav>
+                        <!-- contenido epub -->
                         <select id="toc"></select>
                         <div id="viewer"></div>
                         <a id="prev" href="#prev" class="arrow">‹</a>
@@ -163,7 +191,7 @@
                 </div>
                 <!-- tabla de resaltados -->
                 <div class="mt-5 tablaresaltado">
-                    <table class="table">
+                    <table class="table" style="color: white;">
                         <thead>
                             <tr>
                                 <th scope="col" style="width: 5%;">#</th>

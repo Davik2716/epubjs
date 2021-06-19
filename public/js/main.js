@@ -504,10 +504,20 @@ $(function () {
     // mostrar/ocultar columna anotaciones
     $("#btnAnotaciones").click(function () {
         var x = document.getElementById('columna-anot');
-        if (x.style.visibility === 'hidden') {
-            x.style.visibility = 'visible';
+        var y = document.getElementById('info-basica');
+        // if (x.style.visibility === 'hidden') {
+        //     x.style.visibility = 'visible';
+        //     y.style.visibility = 'hidden';
+        // } else {
+        //     x.style.visibility = 'hidden';
+        //     y.style.visibility = 'visible';
+        // }
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+            y.style.display = 'none';
         } else {
-            x.style.visibility = 'hidden';
+            x.style.display = 'none';
+            y.style.display = 'block';
         }
     });
 });
