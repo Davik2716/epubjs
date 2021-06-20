@@ -512,28 +512,48 @@ $(function () {
 
     // mostrar/ocultar indice
     $("#btnIndice").click(function () {
-        var x = document.getElementById("toc");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
-        }
+        // testeando
+        var toc=document.getElementById("toc");
+        var cantidad=toc.options.length;
+        // alert(cantidad)
+        if (cantidad>40) {cantidad=40}
+        toc.setAttribute("size", ""+cantidad)
+
+        // funcionalidad
+        var anot = document.getElementById('columna-anotaciones');
+        var info = document.getElementById('columna-informacion');
+        var indi = document.getElementById('columna-indice');
+        anot.style.display = 'none';
+        info.style.display = 'none';
+        indi.style.display = 'block';
+
+        // mostrar/ocultar
+        // var x = document.getElementById("toc");
+        // if (x.style.display === "none") {
+        //     x.style.display = "block";
+        // } else {
+        //     x.style.display = "none";
+        // }
     });
 
     // mostrar/ocultar informacion
     $("#btnInformacion").click(function () {
         var anot = document.getElementById('columna-anotaciones');
         var info = document.getElementById('columna-informacion');
+        var indi = document.getElementById('columna-indice');
         anot.style.display = 'none';
         info.style.display = 'block';
+        indi.style.display = 'none';
     });
 
     // mostrar/ocultar columna anotaciones
     $("#btnAnotaciones").click(function () {
         var anot = document.getElementById('columna-anotaciones');
         var info = document.getElementById('columna-informacion');
+        var indi = document.getElementById('columna-indice');
         anot.style.display = 'block';
         info.style.display = 'none';
+        indi.style.display = 'none';
     });
 });
 

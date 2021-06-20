@@ -42,14 +42,14 @@
                 <!-- columna-anotaciones -->
                 <div class="anotaciones" id="columna-anotaciones" style="display: none;">
                     <a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
-                        <span class="fs-5 fw-semibold" style="color: white;">Anotaciones</span>
+                        <span class="fs-5 fw-bold" style="color: rgb(240, 180, 60);">Anotaciones</span>
                     </a>
                     <div class="list-group list-group-flush border-bottom scrollarea" id="anotaciones"></div>
                 </div>
                 <!-- columna-informacion -->
-                <div class="info" id="columna-informacion" style="color: white;">
+                <div class="informacion" id="columna-informacion" style="color: white;">
                     <a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
-                        <span class="fs-5 fw-semibold" style="color: white;">Información</span>
+                        <span class="fs-5 fw-bold" style="color: rgb(240, 180, 60);">Información</span>
                     </a>
                     <div class="list-group list-group-flush border-bottom scrollarea">
                         <p style="text-align: justify;">
@@ -77,6 +77,15 @@
                             neque totam nulla quia perspiciatis, suscipit doloremque consectetur nesciunt sunt adipisci
                             exercitationem ea omnis debitis dicta ad?
                         </p>
+                    </div>
+                </div>
+                <!-- columna-indice -->
+                <div class="indice" id="columna-indice" style="color: white; display: none;">
+                    <a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+                        <span class="fs-5 fw-bold" style="color: rgb(240, 180, 60);">Índice</span>
+                    </a>
+                    <div class="list-group list-group-flush border-bottom scrollarea" id="indice">
+                        <select id="toc" style="color: white; background-color: rgb(50, 50, 50);"></select>
                     </div>
                 </div>
             </div>
@@ -208,7 +217,7 @@
                             </div>
                         </nav>
                         <!-- contenido epub -->
-                        <select id="toc"></select>
+                        <!-- <select id="toc"></select> -->
                         <div id="viewer"></div>
                         <a id="prev" href="#prev" class="arrow">‹</a>
                         <a id="next" href="#next" class="arrow">›</a>

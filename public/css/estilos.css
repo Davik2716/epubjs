@@ -32,7 +32,8 @@
     color: #ccc;
 }
 
-.arrow:hover, .navlink:hover {/*cuando se señala con el cursor*/
+.arrow:hover, .navlink:hover {
+    /*cuando se señala con el cursor*/
     color: rgb(240, 180, 60);
     /* color: red; */
 }
@@ -58,7 +59,7 @@
     max-height: 1000px;
 }
 
-.info {
+.informacion {
     overflow-y: scroll;
     max-height: 1000px;
 }
@@ -68,13 +69,26 @@
     max-height: 500px;
 }
 
+body::-webkit-scrollbar {
+    width: 5px;
+    background: rgb(50, 50, 50);
+}
+
+body::-webkit-scrollbar-thumb {
+    background: rgb(240, 180, 60);
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
+
+#toc::-webkit-scrollbar {
+    display: none;
+}
 
 .anotaciones::-webkit-scrollbar {
     display: none;
 }
 
-.info::-webkit-scrollbar {
+.informacion::-webkit-scrollbar {
     display: none;
 }
 
@@ -84,12 +98,17 @@
 
 /* Hide scrollbar for IE, Edge and Firefox */
 
+#toc::-webkit-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
 .anotaciones {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
-.info {
+.informacion {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
