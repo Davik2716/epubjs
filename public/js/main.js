@@ -59,8 +59,13 @@ book.ready.then(() => {
         if (e.ctrlKey && (e.keyCode || e.which) == 81) {
             // var elem = document.getElementsByClassName("epub-view");
             var elem = document.getElementById("viewer");
+            // para google
             if (elem.requestFullscreen) {
                 elem.requestFullscreen();
+            }
+            // para safari
+            if (elem.webkitEnterFullScreen) {
+                elem.webkitEnterFullScreen();
             }
         }
         // + Key
@@ -236,19 +241,26 @@ rendition.on("selected", function (cfiRange) {
             mi_indice.push(contador)
             // $('#rango').val($('#rango').val()+1);
 
-            remove.textContent = "eliminar" + contador;
-            // remove.setAttribute("id", "eliminar" + contador);
+            remove.setAttribute("id", "eliminar" + contador);
+            remove.textContent = "Eliminar";
             remove.setAttribute("class", "btn btn-danger");
             remove.onclick = function () {
                 rendition.annotations.remove(cfiRange);
 
                 // eliminar la fila seleccionada
-                var id_sel = remove.textContent.slice(8);
-                // var id_sel = remove.getAttribute("id").slice(8);
+                var id_sel = remove.getAttribute("id").slice(8);
                 $('#seleccion').val(id_sel);
 
                 //eliminar la fila del html
                 $('#fila' + id_sel + '').remove();
+
+                // eliminar las anotaciones provenientes de este resaltado
+                // var links = $(".linkeado"+id_sel) // es lo mismo que la línea inferior
+                var links = document.getElementsByClassName("linkeado" + id_sel)
+                // alert(links.length+" elementos para eliminar "+"linkeado"+id_sel)
+                for (let i = links.length - 1; i >= 0; i--) {
+                    links[i].remove();
+                }
 
                 // restaurar el contador    -> NO USARLO POR AHORA
                 // $('#contador').val($('#contador').val()-1);
@@ -260,8 +272,9 @@ rendition.on("selected", function (cfiRange) {
                 return false;
             };
 
-            anotation.textContent = "anotar" + contador;
-            // anotation.setAttribute("id", "anotar" + contador);
+            // $('#linkeado').val(contador);
+            anotation.setAttribute("id", "anotar" + contador);
+            anotation.textContent = "Anotar";
             anotation.setAttribute("class", "btn btn-secondary");
 
             anotation.onclick = function () {
@@ -275,8 +288,7 @@ rendition.on("selected", function (cfiRange) {
                     //trigger: "focus",
                     html: true
                 });
-                var id_sel = anotation.textContent.slice(6)
-                // var id_sel = anotation.getAttribute("id").slice(6)
+                var id_sel = anotation.getAttribute("id").slice(6)
                 $('#seleccion').val(id_sel);
             };
 
@@ -311,9 +323,11 @@ window.enviarAnotacion = function () {
         console.log("se envia la anotacion");
         var anotaciones = document.getElementById('anotaciones');
 
+        var linkeado = $('#seleccion').val()
+
         var a = document.createElement('a');
-        a.href = "#";
-        a.setAttribute("class", "list-group-item list-group-item-action active py-3 lh-tight");
+        // a.href = "#";
+        a.setAttribute("class", "linkeado" + linkeado + " list-group-item list-group-item-action active py-3 lh-tight");
         a.setAttribute("aria-current", true);
 
         var tit_anot = document.createElement('div');
@@ -486,8 +500,13 @@ $(function () {
     // pantalla completa    
     $("#btnPanCom").click(function () {
         var elem = document.getElementById("viewer");
+        // para google
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
+        }
+        // para safari
+        if (elem.webkitEnterFullScreen) {
+            elem.webkitEnterFullScreen();
         }
     });
 
@@ -501,24 +520,20 @@ $(function () {
         }
     });
 
+    // mostrar/ocultar informacion
+    $("#btnInformacion").click(function () {
+        var anot = document.getElementById('columna-anotaciones');
+        var info = document.getElementById('columna-informacion');
+        anot.style.display = 'none';
+        info.style.display = 'block';
+    });
+
     // mostrar/ocultar columna anotaciones
     $("#btnAnotaciones").click(function () {
-        var x = document.getElementById('columna-anot');
-        var y = document.getElementById('info-basica');
-        // if (x.style.visibility === 'hidden') {
-        //     x.style.visibility = 'visible';
-        //     y.style.visibility = 'hidden';
-        // } else {
-        //     x.style.visibility = 'hidden';
-        //     y.style.visibility = 'visible';
-        // }
-        if (x.style.display === 'none') {
-            x.style.display = 'block';
-            y.style.display = 'none';
-        } else {
-            x.style.display = 'none';
-            y.style.display = 'block';
-        }
+        var anot = document.getElementById('columna-anotaciones');
+        var info = document.getElementById('columna-informacion');
+        anot.style.display = 'block';
+        info.style.display = 'none';
     });
 });
 

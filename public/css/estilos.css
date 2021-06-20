@@ -58,6 +58,11 @@
     max-height: 1000px;
 }
 
+.info {
+    overflow-y: scroll;
+    max-height: 1000px;
+}
+
 .tablaresaltado {
     overflow-y: scroll;
     max-height: 500px;
@@ -66,6 +71,10 @@
 /* Hide scrollbar for Chrome, Safari and Opera */
 
 .anotaciones::-webkit-scrollbar {
+    display: none;
+}
+
+.info::-webkit-scrollbar {
     display: none;
 }
 
@@ -81,6 +90,11 @@
 }
 
 .info {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.tablaresaltado {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
